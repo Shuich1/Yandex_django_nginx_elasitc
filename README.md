@@ -1,4 +1,4 @@
-Django + Nginx + PostgreSQL + Docker Compose Web App
+Django + Nginx + PostgreSQL + ElasticSearch + Docker Compose Web App
 ===============================================
 This is a Django web app that uses Docker Compose to run a Django app with a PostgreSQL database and Nginx web server.
 
