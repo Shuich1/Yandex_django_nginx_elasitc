@@ -1,0 +1,260 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-17 23:26+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: app/movies/admin.py:23 app/movies/models.py:53
+msgid "Rating"
+msgstr "Рейтинг"
+
+#: app/movies/admin.py:29
+msgid "1-2"
+msgstr "Наихудший"
+
+#: app/movies/admin.py:30
+msgid "3-4"
+msgstr "Плохой"
+
+#: app/movies/admin.py:31
+msgid "5-6"
+msgstr "Средний"
+
+#: app/movies/admin.py:32
+msgid "7-8"
+msgstr "Хороший"
+
+#: app/movies/admin.py:33
+msgid "9-10"
+msgstr "Отличный"
+
+#: app/movies/admin.py:41 app/movies/models.py:34 app/movies/models.py:109
+msgid "Genre"
+msgstr "Жанр"
+
+#: app/movies/admin.py:47
+msgid "Action"
+msgstr "Экшн"
+
+#: app/movies/admin.py:48
+msgid "Adventure"
+msgstr "Приключения"
+
+#: app/movies/admin.py:49
+msgid "Fantasy"
+msgstr "Фэнтези"
+
+#: app/movies/admin.py:50
+msgid "Sci-Fi"
+msgstr "Научная фантастика"
+
+#: app/movies/admin.py:51
+msgid "Drama"
+msgstr "Драма"
+
+#: app/movies/admin.py:52
+msgid "Music"
+msgstr "Музыка"
+
+#: app/movies/admin.py:53
+msgid "Romance"
+msgstr "Романтика"
+
+#: app/movies/admin.py:54
+msgid "Thriller"
+msgstr "Триллер"
+
+#: app/movies/admin.py:55
+msgid "Mystery"
+msgstr "Мистика"
+
+#: app/movies/admin.py:56
+msgid "Comedy"
+msgstr "Комедия"
+
+#: app/movies/admin.py:57
+msgid "Animation"
+msgstr "Анимация"
+
+#: app/movies/admin.py:58
+msgid "Family"
+msgstr "Семейный"
+
+#: app/movies/admin.py:59
+msgid "Biography"
+msgstr "Биография"
+
+#: app/movies/admin.py:60
+msgid "Musical"
+msgstr "Мюзикл"
+
+#: app/movies/admin.py:61
+msgid "Crime"
+msgstr "Криминал"
+
+#: app/movies/admin.py:62
+msgid "Short"
+msgstr "Короткометражка"
+
+#: app/movies/admin.py:63
+msgid "Western"
+msgstr "Вестерн"
+
+#: app/movies/admin.py:64
+msgid "Documentary"
+msgstr "Документальный"
+
+#: app/movies/admin.py:65
+msgid "History"
+msgstr "История"
+
+#: app/movies/admin.py:66
+msgid "War"
+msgstr "Военный"
+
+#: app/movies/admin.py:67
+msgid "Game-Show"
+msgstr "Игровое шоу"
+
+#: app/movies/admin.py:68
+msgid "Reality-TV"
+msgstr "Реалити-шоу"
+
+#: app/movies/admin.py:69
+msgid "Horror"
+msgstr "Ужасы"
+
+#: app/movies/admin.py:70
+msgid "Sport"
+msgstr "Спорт"
+
+msgid "Talk-Show"
+msgstr "Ток-шоу"
+
+#: app/movies/admin.py:72
+msgid "News"
+msgstr "Новости"
+
+#: app/movies/apps.py:8
+msgid "Movies"
+msgstr "Фильмы"
+
+#: app/movies/models.py:10 app/movies/models.py:113 app/movies/models.py:173
+msgid "Created"
+msgstr "Дата создания записи"
+
+#: app/movies/models.py:14
+msgid "Modified"
+msgstr "Дата изменения записи"
+
+#: app/movies/models.py:29
+msgid "Name"
+msgstr "Название"
+
+#: app/movies/models.py:30 app/movies/models.py:43
+msgid "Description"
+msgstr "Описание"
+
+#: app/movies/models.py:35 app/movies/models.py:75
+msgid "Genres"
+msgstr "Жанры"
+
+#: app/movies/models.py:42
+msgid "Title"
+msgstr "Название"
+
+#: app/movies/models.py:44
+msgid "Creation date"
+msgstr "Дата создания кинопроизведения"
+
+#: app/movies/models.py:47
+msgid "File path"
+msgstr "Путь к файлу"
+
+#: app/movies/models.py:62
+msgid "Movie"
+msgstr "Фильм"
+
+#: app/movies/models.py:63
+msgid "TV Show"
+msgstr "ТВ-шоу"
+
+#: app/movies/models.py:68
+msgid "Type"
+msgstr "Тип"
+
+#: app/movies/models.py:82 app/movies/models.py:143
+msgid "Persons"
+msgstr "Актёры и создатели"
+
+#: app/movies/models.py:87 app/movies/models.py:104 app/movies/models.py:153
+msgid "Filmwork"
+msgstr "Кинопроизведение"
+
+#: app/movies/models.py:88
+msgid "Filmworks"
+msgstr "Кинопроизведения"
+
+#: app/movies/models.py:118
+msgid "Genre of Filmwork"
+msgstr "Жанр кинопроизведения"
+
+#: app/movies/models.py:119
+msgid "Genres of Filmwork"
+msgstr "Жанры кинопроизведения"
+
+#: app/movies/models.py:138
+msgid "Full name"
+msgstr "Полное имя"
+
+#: app/movies/models.py:142 app/movies/models.py:158
+msgid "Person"
+msgstr "Актёры и создатели"
+
+#: app/movies/models.py:162
+msgid "Director"
+msgstr "Режиссёр"
+
+#: app/movies/models.py:163
+msgid "Actor"
+msgstr "Актёр"
+
+#: app/movies/models.py:164
+msgid "Writer"
+msgstr "Сценарист"
+
+#: app/movies/models.py:168
+msgid "Role"
+msgstr "Роль"
+
+#: app/movies/models.py:178
+msgid "Person of Filmwork"
+msgstr "Актёры и создатели кинопроизведения"
+
+#: app/movies/models.py:179
+msgid "Persons of Filmwork"
+msgstr "Актёры и создатели кинопроизведения"
+
+#, fuzzy
+#~| msgid "Rating"
+#~ msgid "rating "
+#~ msgstr "Рейтинг"
+
+#~ msgid "Certificate"
+#~ msgstr "Сертификат"

@@ -1,0 +1,64 @@
+version: '3'
+services:
+  backend:
+    build: app
+    expose:
+      - "8000"
+    volumes:
+      - ./app/static:/opt/app/static:rw
+      - ./app/media:/opt/app/media:rw
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:1.23.2
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/configs:/etc/nginx/conf.d:ro
+      - ./app/static:/data/static:ro
+    depends_on:
+      - backend
+    ports:
+      - "8000:80"
+
+  db:
+    image: postgres:15.1
+    volumes:
+      - ./db:/var/lib/postgresql/data:rw
+    env_file:
+      - .env
+    expose:
+      - "5432"
+
+  elastic:
+    image: elasticsearch:7.17.7
+    volumes:
+      - ./esdata:/usr/share/elasticsearch/data:rw
+    environment:
+      - discovery.type=single-node
+    expose:
+      - "9200"
+    ports:
+      - "9200:9200"
+    
+
+  etl:
+    build: etl
+    volumes:
+      - ./etl:/opt/etl:rw
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - elastic
+      - nginx
+volumes:
+  db:
+  esdata:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ${PWD}/esdata
