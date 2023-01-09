@@ -1,7 +1,9 @@
 from contextlib import contextmanager
-from elasticsearch import Elasticsearch
+
 import psycopg2
-from .logger_config import get_logger
+from elasticsearch import Elasticsearch
+
+from .config import get_logger
 
 logger = get_logger(__name__)
 

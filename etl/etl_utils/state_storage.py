@@ -1,6 +1,6 @@
 import abc
-from typing import Any, Optional
 import json
+from typing import Any, Optional
 
 
 class BaseStorage:
@@ -19,7 +19,7 @@ class JsonFileStorage(BaseStorage):
     """
     Реализация хранилища состояния в файле json
     """
-    def __init__(self, file_path: Optional[str] = None):
+    def __init__(self, file_path: Optional[str] = None) -> None:
         self.file_path = file_path
 
     def save_state(self, state: dict) -> None:
@@ -52,7 +52,7 @@ class JsonFileStorage(BaseStorage):
         except (FileNotFoundError):
             return {
                 'last_etl_process_time': '1970-01-01 00:00:00.000000+00',
-                'loaded_before_error_ids': []
+                'previous_extracted_ids': []
             }
 
 
@@ -65,7 +65,7 @@ class State:
     на работу с БД или распределённым хранилищем.
     """
 
-    def __init__(self, storage: BaseStorage):
+    def __init__(self, storage: BaseStorage) -> None:
         self.storage = storage
 
     def set_state(self, key: str, value: Any) -> None:

@@ -1,17 +1,15 @@
-import sqlite3
-
-import psycopg2
-from psycopg2.extensions import connection as _connection
-
-from dotenv import load_dotenv
-from contextlib import contextmanager
-import os
 import logging
 import logging.config
+import os
+import sqlite3
 import time
+from contextlib import contextmanager
 
-from sqlite_extractor import SQLiteExtractor
+import psycopg2
+from dotenv import load_dotenv
 from postgres_saver import PostgresSaver
+from psycopg2.extensions import connection as _connection
+from sqlite_extractor import SQLiteExtractor
 
 if not os.path.exists('logs'):
     os.mkdir('logs')

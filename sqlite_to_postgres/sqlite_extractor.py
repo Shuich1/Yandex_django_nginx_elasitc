@@ -1,7 +1,7 @@
-from contextlib import contextmanager
-from typing import Tuple
 import logging
 import sqlite3
+from contextlib import contextmanager
+from typing import Tuple
 
 
 class SQLiteExtractor:

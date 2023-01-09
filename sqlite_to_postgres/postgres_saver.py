@@ -1,7 +1,7 @@
-from psycopg2.extensions import connection as _connection
-import psycopg2
-
 import logging
+
+import psycopg2
+from psycopg2.extensions import connection as _connection
 
 
 class PostgresSaver:

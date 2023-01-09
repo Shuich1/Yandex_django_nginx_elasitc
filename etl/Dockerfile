@@ -14,4 +14,4 @@ COPY . .
 
 EXPOSE 9200
 
-RUN ["python", "load_data.py"]
+ENTRYPOINT ["python", "load_data.py"]

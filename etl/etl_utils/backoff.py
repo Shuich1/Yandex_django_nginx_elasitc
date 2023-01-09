@@ -1,6 +1,7 @@
-from functools import wraps
-from .logger_config import get_logger
 import time
+from functools import wraps
+
+from .config import get_logger
 
 logger = get_logger(__name__)
 
@@ -31,8 +32,8 @@ def backoff(start_sleep_time=0.1, factor=2, border_sleep_time=10):
             while True:
                 try:
                     return func(*args, **kwargs)
-                except Exception as e:
-                    logger.error(f'Error in {func.__name__}: {e}')
+                except Exception:
+                    logger.exception('Error occurred. Trying again...')
                     logger.info(f'Waiting {sleep_time} seconds...')
                     time.sleep(sleep_time)
 

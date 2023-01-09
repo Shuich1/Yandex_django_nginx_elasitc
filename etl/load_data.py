@@ -1,17 +1,23 @@
-import time
 import datetime
-import os
-from dotenv import load_dotenv
-from etl_utils.backoff import backoff
-from etl_utils.logger_config import get_logger
-from etl_utils.state_storage import State, JsonFileStorage
+import logging
+import time
+
+from etl_process.elasticsearch_loader import ElasticsearchLoader
 from etl_process.postgres_extractor import PostgresExtractor
 from etl_process.transformer import Transformer
-from etl_process.elasticsearch_loader import ElasticsearchLoader
+from etl_utils.backoff import backoff
+from etl_utils.config import ETLServicesConfig, get_logger
+from etl_utils.state_storage import JsonFileStorage, State
 
 
 @backoff()
-def etl_process(extractor, transformer, loader, state, loaded_before_error_ids, logger):
+def etl_process(
+    extractor: PostgresExtractor,
+    transformer: Transformer,
+    loader: ElasticsearchLoader,
+    state: State,
+    logger: logging.Logger
+):
     """
     Функция для запуска ETL процесса для
     загрузки данных из Postgres в ElasticSearch
@@ -21,61 +27,45 @@ def etl_process(extractor, transformer, loader, state, loaded_before_error_ids, 
     last_etl_process_time = state.get_state('last_etl_process_time')
     logger.info(f'Last ETL process time: {last_etl_process_time}')
 
-    try:
-        for i, batch in enumerate(extractor.extract(last_etl_process_time)):
-            logger.info(f'Extracted {i+1} batch')
-            transformed_batch = transformer.transform(batch)
-            logger.info(f'Transformed {i+1} batch')
-            loaded_ids_in_batch = loader.load(transformed_batch)
-            loaded_before_error_ids.extend(loaded_ids_in_batch)
-            logger.info(f'Loaded {i+1} batch')
+    for i, batch in enumerate(extractor.extract(last_etl_process_time)):
+        logger.info(f'Extracted {i+1} batch')
+        transformed_batch = transformer.transform(batch)
+        logger.info(f'Transformed {i+1} batch')
+        loader.load(transformed_batch)
+        logger.info(f'Loaded {i+1} batch')
 
-        state.set_state(
-            'last_etl_process_time',
-            datetime.datetime.now().isoformat()
-        )
+    state.set_state(
+        'last_etl_process_time',
+        datetime.datetime.now().isoformat()
+    )
 
-        logger.info(
-            f'This ETL process time:'
-            f'{state.get_state("last_etl_process_time")}'
-        )
+    logger.info(
+        f'This ETL process time:'
+        f'{state.get_state("last_etl_process_time")}'
+    )
 
-        logger.info('ETL process finished')
+    logger.info('ETL process finished')
 
-    except Exception:
-        state.set_state(
-            'loaded_before_error_ids',
-            loaded_before_error_ids
-        )
-        logger.exception('ETL process failed')
-        return
+    state.set_state('previous_extracted_ids', [])
 
 
 if __name__ == '__main__':
-    load_dotenv()
-
+    config = ETLServicesConfig()
     logger = get_logger(__name__)
 
     state = State(JsonFileStorage('state.json'))
 
-    pg_dsn = {
-        'dbname': os.environ.get('POSTGRES_DB'),
-        'user': os.environ.get('POSTGRES_USER'),
-        'password': os.environ.get('POSTGRES_PASSWORD'),
-        'host': os.environ.get('POSTGRES_HOST'),
-        'port': os.environ.get('POSTGRES_PORT')
-    }
+    pg_dsn = config.postgres
+    es_dsn = config.elastic
+    batch_size = config.batch_size
 
-    es_dsn = os.environ.get('ES_DSN')
-
-    extractor = PostgresExtractor(pg_dsn, 100, state, logger)
+    extractor = PostgresExtractor(pg_dsn, batch_size, state, logger)
     transformer = Transformer(logger)
     loader = ElasticsearchLoader(es_dsn, logger)
 
-    sleep_time = int(os.environ.get('SLEEP_TIME'))
+    sleep_time = config.sleep_time
 
     while True:
-        loaded_before_error_ids = []
-        etl_process(extractor, transformer, loader, state, loaded_before_error_ids, logger)
+        etl_process(extractor, transformer, loader, state, logger)
         logger.info(f'Waiting {sleep_time} seconds before next ETL process')
         time.sleep(sleep_time)

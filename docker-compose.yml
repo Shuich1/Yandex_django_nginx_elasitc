@@ -38,12 +38,10 @@ services:
       - ./esdata:/usr/share/elasticsearch/data:rw
     environment:
       - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms2048m -Xmx2048m
     expose:
       - "9200"
-    ports:
-      - "9200:9200"
     
-
   etl:
     build: etl
     volumes:
@@ -54,6 +52,7 @@ services:
       - db
       - elastic
       - nginx
+
 volumes:
   db:
   esdata:
