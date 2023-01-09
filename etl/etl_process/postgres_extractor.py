@@ -61,7 +61,7 @@ class PostgresExtractor:
                 cursor.execute(query)
 
                 while batch := cursor.fetchmany(self.batch_size):
-                    self.logger.info(f'Extracted {len(batch)} rows from Postgres')
+                    self.logger.info('Extracted %d rows from Postgres', len(batch))
                     self.state.set_state(
                         'previous_extracted_ids',
                         [self.state.get_state('previous_extracted_ids').append(row['id']) for row in batch]

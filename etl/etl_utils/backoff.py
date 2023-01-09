@@ -34,7 +34,7 @@ def backoff(start_sleep_time=0.1, factor=2, border_sleep_time=10):
                     return func(*args, **kwargs)
                 except Exception:
                     logger.exception('Error occurred. Trying again...')
-                    logger.info(f'Waiting {sleep_time} seconds...')
+                    logger.info('Waiting %s seconds...', sleep_time)
                     time.sleep(sleep_time)
 
                     if sleep_time * factor < border_sleep_time:

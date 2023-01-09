@@ -1,12 +1,9 @@
-import logging
-
-
 class Transformer:
     """
     Класс для трансформации данных из Postgres в ElasticSearch
     """
-    def __init__(self, logger: logging.Logger) -> None:
-        self.logger = logger
+    def __init__(self) -> None:
+        pass
 
     def transform(self, batch: dict) -> list[dict]:
         """

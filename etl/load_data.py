@@ -25,14 +25,14 @@ def etl_process(
     logger.info('ETL process started')
 
     last_etl_process_time = state.get_state('last_etl_process_time')
-    logger.info(f'Last ETL process time: {last_etl_process_time}')
+    logger.info('Last ETL process time: %s', last_etl_process_time)
 
     for i, batch in enumerate(extractor.extract(last_etl_process_time)):
-        logger.info(f'Extracted {i+1} batch')
+        logger.info(f'Extracted %d batch', i+1)
         transformed_batch = transformer.transform(batch)
-        logger.info(f'Transformed {i+1} batch')
+        logger.info(f'Transformed %d batch', i+1)
         loader.load(transformed_batch)
-        logger.info(f'Loaded {i+1} batch')
+        logger.info(f'Loaded %d batch', i+1)
 
     state.set_state(
         'last_etl_process_time',
@@ -60,12 +60,12 @@ if __name__ == '__main__':
     batch_size = config.batch_size
 
     extractor = PostgresExtractor(pg_dsn, batch_size, state, logger)
-    transformer = Transformer(logger)
+    transformer = Transformer()
     loader = ElasticsearchLoader(es_dsn, logger)
 
     sleep_time = config.sleep_time
 
     while True:
         etl_process(extractor, transformer, loader, state, logger)
-        logger.info(f'Waiting {sleep_time} seconds before next ETL process')
+        logger.info('Waiting %s seconds before next ETL process', sleep_time)
         time.sleep(sleep_time)
