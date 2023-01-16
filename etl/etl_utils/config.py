@@ -1,6 +1,7 @@
 import logging
 import logging.config
 import time
+import os
 
 from pydantic import BaseModel, BaseSettings, Field
 
@@ -40,6 +41,9 @@ def get_logger(name: str) -> logging.Logger:
     Returns:
         logger: логгер
     """
+    if not os.path.exists('logs'):
+        os.mkdir('logs')
+
     logging.config.dictConfig(LOGGING_CONFIG)
     return logging.getLogger(name)
 
